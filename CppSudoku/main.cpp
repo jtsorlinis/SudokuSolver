@@ -104,7 +104,7 @@ bool solve(Board& board) {
   return false;
 }
 
-int main(int, char**) {
+int main() {
   solve(board);
   PrintBoard(board);
   std::cout << "Solved in " << steps << " steps\n";
