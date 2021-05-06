@@ -20,7 +20,7 @@ namespace CSharpSudoku
 
     static int steps = 0;
 
-    static void PrintBoard(int[,] board)
+    static void PrintBoard(ref int[,] board)
     {
       Console.WriteLine();
       for (int row = 0; row < 9; row++)
@@ -49,7 +49,7 @@ namespace CSharpSudoku
       Console.WriteLine();
     }
 
-    static bool FindEmpty(int[,] board, ref int r, ref int c)
+    static bool FindEmpty(ref int[,] board, ref int r, ref int c)
     {
       for (int row = 0; row < 9; row++)
       {
@@ -66,7 +66,7 @@ namespace CSharpSudoku
       return false;
     }
 
-    static bool Valid(int[,] board, int row, int col, int num)
+    static bool Valid(ref int[,] board, int row, int col, int num)
     {
       // check column
       for (int y = 0; y < 9; y++)
@@ -108,11 +108,11 @@ namespace CSharpSudoku
       steps++;
       if (steps % 100000 == 0)
       {
-        PrintBoard(board);
+        PrintBoard(ref board);
         Console.WriteLine("Combinations tried: " + steps);
       }
       int row = 0, col = 0;
-      bool hasEmpty = FindEmpty(board, ref row, ref col);
+      bool hasEmpty = FindEmpty(ref board, ref row, ref col);
 
       if (!hasEmpty)
       {
@@ -121,7 +121,7 @@ namespace CSharpSudoku
 
       for (int i = 1; i <= 9; i++)
       {
-        if (Valid(board, row, col, i))
+        if (Valid(ref board, row, col, i))
         {
           board[row, col] = i;
           if (Solve(ref board))
@@ -137,7 +137,7 @@ namespace CSharpSudoku
     static void Main()
     {
       Solve(ref board);
-      PrintBoard(board);
+      PrintBoard(ref board);
       Console.WriteLine("Solved in " + steps + " steps");
     }
   }
