@@ -1,4 +1,4 @@
-type Board = [[i32; 9]; 9];
+type Board = [[u8; 9]; 9];
 
 fn print_board(board: &Board) {
     println!();
@@ -21,12 +21,12 @@ fn print_board(board: &Board) {
     println!();
 }
 
-fn find_empty(board: &Board, r: &mut i32, c: &mut i32) -> bool {
+fn find_empty(board: &Board, r: &mut usize, c: &mut usize) -> bool {
     for row in 0..9 {
         for col in 0..9 {
             if board[row][col] == 0 {
-                *r = row as i32;
-                *c = col as i32;
+                *r = row;
+                *c = col;
                 return true;
             }
         }
@@ -34,17 +34,17 @@ fn find_empty(board: &Board, r: &mut i32, c: &mut i32) -> bool {
     return false;
 }
 
-fn valid(board: &Board, row: i32, col: i32, num: i32) -> bool {
+fn valid(board: &Board, row: usize, col: usize, num: u8) -> bool {
     // check column
     for y in 0..9 {
-        if board[y][col as usize] == num {
+        if board[y][col] == num {
             return false;
         }
     }
 
     // check row
     for x in 0..9 {
-        if board[row as usize][x] == num {
+        if board[row][x] == num {
             return false;
         }
     }
@@ -54,7 +54,7 @@ fn valid(board: &Board, row: i32, col: i32, num: i32) -> bool {
     let box_x = col / 3 * 3;
     for y in box_y..box_y + 3 {
         for x in box_x..box_x + 3 {
-            if board[y as usize][x as usize] == num {
+            if board[y][x] == num {
                 return false;
             }
         }
@@ -62,7 +62,7 @@ fn valid(board: &Board, row: i32, col: i32, num: i32) -> bool {
     return true;
 }
 
-fn solve(board: &mut Board, steps: &mut i32) -> bool {
+fn solve(board: &mut Board, steps: &mut u32) -> bool {
     *steps += 1;
     if *steps % 100000 == 0 {
         print_board(board);
@@ -78,12 +78,12 @@ fn solve(board: &mut Board, steps: &mut i32) -> bool {
 
     for i in 1..10 {
         if valid(board, row, col, i) {
-            board[row as usize][col as usize] = i;
+            board[row][col] = i;
 
             if solve(board, steps) {
                 return true;
             }
-            board[row as usize][col as usize] = 0;
+            board[row][col] = 0;
         }
     }
 
