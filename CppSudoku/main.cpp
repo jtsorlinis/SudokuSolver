@@ -20,7 +20,7 @@ void PrintBoard(Board& board) {
   std::cout << "\n";
   for (int row = 0; row < 9; row++) {
     if (row % 3 == 0 && row != 0) {
-      std::cout << "---------------------\n";
+      std::cout << "------+-------+------\n";
     }
     for (int col = 0; col < 9; col++) {
       if (col % 3 == 0 && col != 0) {

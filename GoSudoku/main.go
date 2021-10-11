@@ -23,7 +23,7 @@ func printBoard(board *Board) {
 	fmt.Println()
 	for row := 0; row < 9; row++ {
 		if row%3 == 0 && row != 0 {
-			fmt.Println("---------------------")
+			fmt.Println("------+-------+------")
 		}
 		for col := 0; col < 9; col++ {
 			if col%3 == 0 && col != 0 {

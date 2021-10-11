@@ -27,7 +27,7 @@ namespace CSharpSudoku
       {
         if (row % 3 == 0 && row != 0)
         {
-          Console.WriteLine("---------------------");
+          Console.WriteLine("------+-------+------");
         }
         for (int col = 0; col < 9; col++)
         {

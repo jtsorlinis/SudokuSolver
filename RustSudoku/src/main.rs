@@ -4,7 +4,7 @@ fn print_board(board: &Board) {
     println!();
     for row in 0..9 {
         if row % 3 == 0 && row != 0 {
-            println!("---------------------")
+            println!("------+-------+------")
         }
         for col in 0..9 {
             if col % 3 == 0 && col != 0 {

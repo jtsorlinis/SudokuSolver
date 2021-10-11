@@ -7,7 +7,7 @@ const board = [
   [0, 0, 0, 0, 0, 0, 4, 1, 8],
   [0, 0, 0, 0, 8, 1, 0, 0, 0],
   [0, 0, 2, 0, 0, 0, 0, 5, 0],
-  [0, 4, 0, 0, 0, 0, 3, 0, 0]
+  [0, 4, 0, 0, 0, 0, 3, 0, 0],
 ]
 
 let steps = 0
@@ -16,13 +16,15 @@ const printBoard = (board) => {
   console.log()
   for (let row = 0; row < 9; row++) {
     if (row % 3 === 0 && row !== 0) {
-      console.log('---------------------')
+      console.log('------+-------+------')
     }
     for (let col = 0; col < 9; col++) {
       if (col % 3 === 0 && col !== 0) {
         process.stdout.write('| ')
       }
-      process.stdout.write((board[row][col] === 0 ? ' ' : board[row][col]) + ' ')
+      process.stdout.write(
+        (board[row][col] === 0 ? ' ' : board[row][col]) + ' '
+      )
     }
     console.log()
   }

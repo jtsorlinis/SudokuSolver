@@ -2,7 +2,7 @@ def print_board(board):
     print()
     for row in range(9):
         if(row % 3 == 0 and row != 0):
-            print("---------------------")
+            print("------+-------+------")
         for col in range(9):
             if(col % 3 == 0 and col != 0):
                 print("|", end=" ")
