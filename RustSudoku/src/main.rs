@@ -22,29 +22,29 @@ fn print_board(board: &Board) {
 }
 
 fn find_empty(board: &Board, r: &mut usize, c: &mut usize) -> bool {
-    for row in 0..9 {
-        for col in 0..9 {
-            if board[row][col] == 0 {
+    for (row, y) in board.iter().enumerate().take(9) {
+        for (col, x) in y.iter().enumerate().take(9) {
+            if *x == 0 {
                 *r = row;
                 *c = col;
                 return true;
             }
         }
     }
-    return false;
+    false
 }
 
 fn valid(board: &Board, row: usize, col: usize, num: u8) -> bool {
     // check column
-    for y in 0..9 {
-        if board[y][col] == num {
+    for y in board.iter().take(9) {
+        if y[col] == num {
             return false;
         }
     }
 
     // check row
-    for x in 0..9 {
-        if board[row][x] == num {
+    for x in board[row].iter().take(9) {
+        if *x == num {
             return false;
         }
     }
@@ -52,14 +52,14 @@ fn valid(board: &Board, row: usize, col: usize, num: u8) -> bool {
     // check box
     let box_y = row / 3 * 3;
     let box_x = col / 3 * 3;
-    for y in box_y..box_y + 3 {
-        for x in box_x..box_x + 3 {
-            if board[y][x] == num {
+    for y in board.iter().skip(box_y).take(3) {
+        for x in y.iter().skip(box_x).take(3) {
+            if *x == num {
                 return false;
             }
         }
     }
-    return true;
+    true
 }
 
 fn solve(board: &mut Board, steps: &mut u32) -> bool {
@@ -87,7 +87,7 @@ fn solve(board: &mut Board, steps: &mut u32) -> bool {
         }
     }
 
-    return false;
+    false
 }
 
 fn main() {
