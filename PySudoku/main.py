@@ -1,10 +1,10 @@
 def print_board(board):
     print()
     for row in range(9):
-        if(row % 3 == 0 and row != 0):
+        if row % 3 == 0 and row != 0:
             print("------+-------+------")
         for col in range(9):
-            if(col % 3 == 0 and col != 0):
+            if col % 3 == 0 and col != 0:
                 print("|", end=" ")
             print(board[row][col] if board[row][col] != 0 else " ", end=" ")
         print()
@@ -34,8 +34,8 @@ def valid(board, row, col, num):
     # check box
     box_y = row // 3 * 3
     box_x = col // 3 * 3
-    for y in range(box_y, box_y+3):
-        for x in range(box_x, box_x+3):
+    for y in range(box_y, box_y + 3):
+        for x in range(box_x, box_x + 3):
             if board[y][x] == num:
                 return False
 
@@ -76,15 +76,15 @@ def solve(board):
 steps = 0
 
 board = [
-        [0, 0, 0, 7, 0, 0, 0, 0, 0],
-        [1, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 4, 3, 0, 2, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 6],
-        [0, 0, 0, 5, 0, 9, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 4, 1, 8],
-        [0, 0, 0, 0, 8, 1, 0, 0, 0],
-        [0, 0, 2, 0, 0, 0, 0, 5, 0],
-        [0, 4, 0, 0, 0, 0, 3, 0, 0],
+    [0, 0, 0, 7, 0, 0, 0, 0, 0],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 4, 3, 0, 2, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 6],
+    [0, 0, 0, 5, 0, 9, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 4, 1, 8],
+    [0, 0, 0, 0, 8, 1, 0, 0, 0],
+    [0, 0, 2, 0, 0, 0, 0, 5, 0],
+    [0, 4, 0, 0, 0, 0, 3, 0, 0],
 ]
 
 
