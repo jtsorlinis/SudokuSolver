@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 
-using Board = int[9][9];
-int steps = 0;
+using Board = uint[9][9];
+size_t steps = 0;
 
 Board board = {
     {0, 0, 0, 7, 0, 0, 0, 0, 0},  //
@@ -18,11 +18,11 @@ Board board = {
 
 void PrintBoard(Board& board) {
   std::cout << "\n";
-  for (int row = 0; row < 9; row++) {
+  for (size_t row = 0; row < 9; row++) {
     if (row % 3 == 0 && row != 0) {
       std::cout << "------+-------+------\n";
     }
-    for (int col = 0; col < 9; col++) {
+    for (size_t col = 0; col < 9; col++) {
       if (col % 3 == 0 && col != 0) {
         std::cout << "| ";
       }
@@ -35,9 +35,9 @@ void PrintBoard(Board& board) {
   std::cout << "\n";
 }
 
-bool find_empty(Board& board, int& r, int& c) {
-  for (int row = 0; row < 9; row++) {
-    for (int col = 0; col < 9; col++) {
+bool find_empty(Board& board, size_t& r, size_t& c) {
+  for (size_t row = 0; row < 9; row++) {
+    for (size_t col = 0; col < 9; col++) {
       if (board[row][col] == 0) {
         r = row;
         c = col;
@@ -48,26 +48,26 @@ bool find_empty(Board& board, int& r, int& c) {
   return false;
 }
 
-bool valid(Board& board, int row, int col, int num) {
+bool valid(Board& board, size_t row, size_t col, uint num) {
   // check column
-  for (int y = 0; y < 9; y++) {
+  for (size_t y = 0; y < 9; y++) {
     if (board[y][col] == num) {
       return false;
     }
   }
 
   // check row
-  for (int x = 0; x < 9; x++) {
+  for (size_t x = 0; x < 9; x++) {
     if (board[row][x] == num) {
       return false;
     }
   }
 
   // check box
-  int box_y = row / 3 * 3;
-  int box_x = col / 3 * 3;
-  for (int y = box_y; y < box_y + 3; y++) {
-    for (int x = box_x; x < box_x + 3; x++) {
+  size_t box_y = row / 3 * 3;
+  size_t box_x = col / 3 * 3;
+  for (size_t y = box_y; y < box_y + 3; y++) {
+    for (size_t x = box_x; x < box_x + 3; x++) {
       if (board[y][x] == num) {
         return false;
       }
@@ -83,14 +83,14 @@ bool solve(Board& board) {
     PrintBoard(board);
     std::cout << "Combinations tried: " << steps << "\n";
   }
-  int row, col;
+  size_t row, col;
   bool first_empty = find_empty(board, row, col);
 
   if (!first_empty) {
     return true;
   }
 
-  for (int i = 1; i <= 9; i++) {
+  for (size_t i = 1; i <= 9; i++) {
     if (valid(board, row, col, i)) {
       board[row][col] = i;
 
