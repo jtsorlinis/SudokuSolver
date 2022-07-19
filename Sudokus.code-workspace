@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "CppSudoku"
+		},
+		{
+			"path": "CSharpSudoku"
+		},
+		{
+			"path": "GoSudoku"
+		},
+		{
+			"path": "JsSudoku"
+		},
+		{
+			"path": "PySudoku"
+		},
+		{
+			"path": "RustSudoku"
+		}
+	],
+	"settings": {}
+}
