@@ -28,8 +28,7 @@ hyperfine --warmup 3 --export-markdown results_$num.md \
 "RustSudoku/target/release/rust_sudoku" \
 "GoSudoku/GoSudoku" \
 "node JsSudoku/." \
-"dotnet CSharpSudoku/bin/release/net5.0/CSharpSudoku.dll" \
-"pypy3 PySudoku/main.py" \
+"dotnet CSharpSudoku/bin/release/net6.0/CSharpSudoku.dll" \
 "python3 PySudoku/main.py" 
 
 exit 0
