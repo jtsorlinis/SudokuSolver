@@ -4,7 +4,7 @@ echo "Building CPPSudoku"
 cd CPPSudoku
 mkdir -p build
 cd build
-cmake ..
+cmake -DCMAKE_BUILD_TYPE=Release ..
 make
 cd ../..
 
@@ -28,7 +28,7 @@ hyperfine --warmup 3 --export-markdown results_$num.md \
 "RustSudoku/target/release/rust_sudoku" \
 "GoSudoku/GoSudoku" \
 "node JsSudoku/." \
-"dotnet CSharpSudoku/bin/release/net6.0/CSharpSudoku.dll" \
+"dotnet CSharpSudoku/bin/release/net7.0/CSharpSudoku.dll" \
 "python3 PySudoku/main.py" 
 
 exit 0
