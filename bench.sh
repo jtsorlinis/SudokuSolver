@@ -1,12 +1,8 @@
 #!/bin/bash
 
-echo "Building CPPSudoku"
-cd CPPSudoku
-mkdir -p build
-cd build
-cmake -DCMAKE_BUILD_TYPE=Release ..
-make
-cd ../..
+echo "Building CppSudoku"
+xmake f -P CppSudoku -m release
+xmake build -P CppSudoku
 
 echo "Building CSharpSudoku"
 cd CSharpSudoku
@@ -24,7 +20,7 @@ cargo build --release
 cd ..
 
 hyperfine --warmup 3 --export-markdown results_$num.md \
-"CPPSudoku/build/CPPSudoku" \
+"CppSudoku/build/release/CppSudoku" \
 "RustSudoku/target/release/rust_sudoku" \
 "GoSudoku/GoSudoku" \
 "node JsSudoku/." \
