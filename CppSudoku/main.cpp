@@ -1,50 +1,42 @@
-#include <iostream>
-#include <string>
+#include <cstdint>
+#include <cstdio>
 
-using Board = uint[9][9];
-size_t steps = 0;
+using Board = uint8_t[9][9];
 
-Board board = {
-    {0, 0, 0, 7, 0, 0, 0, 0, 0}, //
-    {1, 0, 0, 0, 0, 0, 0, 0, 0}, //
-    {0, 0, 0, 4, 3, 0, 2, 0, 0}, //
-    {0, 0, 0, 0, 0, 0, 0, 0, 6}, //
-    {0, 0, 0, 5, 0, 9, 0, 0, 0}, //
-    {0, 0, 0, 0, 0, 0, 4, 1, 8}, //
-    {0, 0, 0, 0, 8, 1, 0, 0, 0}, //
-    {0, 0, 2, 0, 0, 0, 0, 5, 0}, //
-    {0, 4, 0, 0, 0, 0, 3, 0, 0}, //
-};
-
-void PrintBoard(Board &board)
+static void PrintBoard(Board &board)
 {
-  std::cout << "\n";
-  for (size_t row = 0; row < 9; row++)
+  std::puts("");
+  for (uint8_t row = 0; row < 9; row++)
   {
     if (row % 3 == 0 && row != 0)
     {
-      std::cout << "------+-------+------\n";
+      std::puts("------+-------+------");
     }
-    for (size_t col = 0; col < 9; col++)
+    for (uint8_t col = 0; col < 9; col++)
     {
       if (col % 3 == 0 && col != 0)
       {
-        std::cout << "| ";
+        std::printf("| ");
       }
-      std::cout << (board[row][col] == 0 ? " "
-                                         : std::to_string(board[row][col]))
-                << " ";
+      if (board[row][col] == 0)
+      {
+        std::printf("  ");
+      }
+      else
+      {
+        std::printf("%u ", static_cast<unsigned int>(board[row][col]));
+      }
     }
-    std::cout << "\n";
+    std::puts("");
   }
-  std::cout << "\n";
+  std::puts("");
 }
 
-bool find_empty(Board &board, size_t &r, size_t &c)
+static bool find_empty(Board &board, uint8_t &r, uint8_t &c)
 {
-  for (size_t row = 0; row < 9; row++)
+  for (uint8_t row = 0; row < 9; row++)
   {
-    for (size_t col = 0; col < 9; col++)
+    for (uint8_t col = 0; col < 9; col++)
     {
       if (board[row][col] == 0)
       {
@@ -57,10 +49,10 @@ bool find_empty(Board &board, size_t &r, size_t &c)
   return false;
 }
 
-bool valid(Board &board, size_t row, size_t col, uint num)
+static bool valid(Board &board, uint8_t row, uint8_t col, uint8_t num)
 {
   // check column
-  for (size_t y = 0; y < 9; y++)
+  for (uint8_t y = 0; y < 9; y++)
   {
     if (board[y][col] == num)
     {
@@ -69,7 +61,7 @@ bool valid(Board &board, size_t row, size_t col, uint num)
   }
 
   // check row
-  for (size_t x = 0; x < 9; x++)
+  for (uint8_t x = 0; x < 9; x++)
   {
     if (board[row][x] == num)
     {
@@ -78,11 +70,11 @@ bool valid(Board &board, size_t row, size_t col, uint num)
   }
 
   // check box
-  size_t box_y = row / 3 * 3;
-  size_t box_x = col / 3 * 3;
-  for (size_t y = box_y; y < box_y + 3; y++)
+  uint8_t box_y = row / 3 * 3;
+  uint8_t box_x = col / 3 * 3;
+  for (uint8_t y = box_y; y < box_y + 3; y++)
   {
-    for (size_t x = box_x; x < box_x + 3; x++)
+    for (uint8_t x = box_x; x < box_x + 3; x++)
     {
       if (board[y][x] == num)
       {
@@ -94,15 +86,16 @@ bool valid(Board &board, size_t row, size_t col, uint num)
   return true;
 }
 
-bool solve(Board &board)
+static bool solve(Board &board, uint32_t &steps)
 {
   steps++;
   if (steps % 100000 == 0)
   {
     PrintBoard(board);
-    std::cout << "Combinations tried: " << steps << "\n";
+    std::printf("Combinations tried: %u\n", static_cast<unsigned int>(steps));
   }
-  size_t row, col;
+  uint8_t row = 0;
+  uint8_t col = 0;
   bool first_empty = find_empty(board, row, col);
 
   if (!first_empty)
@@ -110,13 +103,13 @@ bool solve(Board &board)
     return true;
   }
 
-  for (size_t i = 1; i <= 9; i++)
+  for (uint8_t i = 1; i < 10; i++)
   {
     if (valid(board, row, col, i))
     {
       board[row][col] = i;
 
-      if (solve(board))
+      if (solve(board, steps))
       {
         return true;
       }
@@ -129,7 +122,20 @@ bool solve(Board &board)
 
 int main()
 {
-  solve(board);
+  uint32_t steps = 0;
+  Board board = {
+      {0, 0, 0, 7, 0, 0, 0, 0, 0}, //
+      {1, 0, 0, 0, 0, 0, 0, 0, 0}, //
+      {0, 0, 0, 4, 3, 0, 2, 0, 0}, //
+      {0, 0, 0, 0, 0, 0, 0, 0, 6}, //
+      {0, 0, 0, 5, 0, 9, 0, 0, 0}, //
+      {0, 0, 0, 0, 0, 0, 4, 1, 8}, //
+      {0, 0, 0, 0, 8, 1, 0, 0, 0}, //
+      {0, 0, 2, 0, 0, 0, 0, 5, 0}, //
+      {0, 4, 0, 0, 0, 0, 3, 0, 0}, //
+  };
+
+  solve(board, steps);
   PrintBoard(board);
-  std::cout << "Solved in " << steps << " steps\n";
+  std::printf("Solved in %u steps\n", static_cast<unsigned int>(steps));
 }

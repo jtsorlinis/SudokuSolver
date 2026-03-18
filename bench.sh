@@ -19,7 +19,7 @@ cargo build --release
 cd ..
 
 hyperfine --warmup 3 --export-markdown results_$num.md \
-"CppSudoku/build/bin/CppSudoku" \
+"CppSudoku/build/bin/CPPSudoku" \
 "RustSudoku/target/release/rust_sudoku" \
 "GoSudoku/GoSudoku" \
 "node JsSudoku/." \

@@ -2,22 +2,22 @@ type Board = [[u8; 9]; 9];
 
 fn print_board(board: &Board) {
     println!();
-    for row in 0..9 {
-        if row % 3 == 0 && row != 0 {
+    board.iter().take(9).enumerate().for_each(|(row, _y)| {
+        if row.is_multiple_of(3) && row != 0 {
             println!("------+-------+------")
         }
-        for col in 0..9 {
-            if col % 3 == 0 && col != 0 {
+        board[row].iter().take(9).enumerate().for_each(|(col, x)| {
+            if col.is_multiple_of(3) && col != 0 {
                 print!("| ")
             }
-            if board[row][col] == 0 {
+            if *x == 0 {
                 print!("  ")
             } else {
-                print!("{} ", board[row][col]);
+                print!("{} ", *x);
             }
-        }
+        });
         println!();
-    }
+    });
     println!();
 }
 
@@ -64,7 +64,7 @@ fn valid(board: &Board, row: usize, col: usize, num: u8) -> bool {
 
 fn solve(board: &mut Board, steps: &mut u32) -> bool {
     *steps += 1;
-    if *steps % 100000 == 0 {
+    if (*steps).is_multiple_of(100000) {
         print_board(board);
         println!("Combinations tried: {}", steps);
     }
