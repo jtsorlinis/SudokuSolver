@@ -21,11 +21,11 @@ var steps = 0
 
 func printBoard(board *Board) {
 	fmt.Println()
-	for row := 0; row < 9; row++ {
+	for row := range 9 {
 		if row%3 == 0 && row != 0 {
 			fmt.Println("------+-------+------")
 		}
-		for col := 0; col < 9; col++ {
+		for col := range 9 {
 			if col%3 == 0 && col != 0 {
 				fmt.Print("| ")
 			}
@@ -41,8 +41,8 @@ func printBoard(board *Board) {
 }
 
 func findEmpty(board *Board) (int, int, bool) {
-	for row := 0; row < 9; row++ {
-		for col := 0; col < 9; col++ {
+	for row := range 9 {
+		for col := range 9 {
 			if board[row][col] == 0 {
 				return row, col, true
 			}
@@ -53,14 +53,14 @@ func findEmpty(board *Board) (int, int, bool) {
 
 func valid(board *Board, row int, col int, num int) bool {
 	// check column
-	for y := 0; y < 9; y++ {
+	for y := range 9 {
 		if board[y][col] == num {
 			return false
 		}
 	}
 
 	// check row
-	for x := 0; x < 9; x++ {
+	for x := range 9 {
 		if board[row][x] == num {
 			return false
 		}
